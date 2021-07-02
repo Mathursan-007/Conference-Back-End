@@ -1,5 +1,6 @@
 const Express = require('express');
 const cors = require('cors');
+const path = require('path')
 
 const AdminRoutes = require('./routes/admin.router');
 const EditorRoutes = require('./routes/editor.router');

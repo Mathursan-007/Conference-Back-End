@@ -12,7 +12,7 @@ require('./dal/connection');
 
 const app = new Express();
 
-const whitelist = ['http://localhost:1234','https://task-track-frontend.herokuapp.com']
+const whitelist = ['http://localhost:3000','https://conference-front-end.herokuapp.com']
 const corsOptions = {
     origin: function (origin, callback) {
         console.log("** Origin of request " + origin)

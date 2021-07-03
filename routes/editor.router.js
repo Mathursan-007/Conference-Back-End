@@ -164,7 +164,7 @@ router.post("/addConference", auth,async (req,res)=>{
 });
 
 
-router.post("/addCallForPaper",async (req,res)=>{
+router.post("/addCallForPaper",auth,async (req,res)=>{
 
     console.log(req.body.title)
     try{

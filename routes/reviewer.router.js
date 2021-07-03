@@ -97,7 +97,7 @@ router.patch("/upload/payment/:id",auth, async (req, res) => {
     let requests = await updatePayment(req.params.id, req.body.status);
 
     if(requests) {
-        await addLog("Reviewer","Workshop proposal accepted and notified to "+req.body.email)
+        await addLog("Reviewer","Payment updated")
         res.status(201).send(requests);
     }
     else {

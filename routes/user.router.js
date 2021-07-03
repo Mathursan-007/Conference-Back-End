@@ -143,8 +143,7 @@ router.post("/addPresenterUploads",auth,upload.single('proposal'),async (req,res
                 name: req.body.name,
                 email: req.body.email,
                 phoneNumber:req.body.phoneNumber,
-                proposal:result.secure_url,
-                paymentStatus:'pending'
+                proposal:result.secure_url
             },
             user:req.id.username.split(' ')[0]
         });

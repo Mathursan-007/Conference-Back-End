@@ -39,8 +39,8 @@ router.patch("/upload/:id",auth, async (req, res) => {
     let requests = await updateStatus(req.params.id, req.body.status, req.body.reviewerID);
 
     if(requests) {
-        if(req.body.status=="approved"){
-            if(req.body.type=="research"){
+        if(req.body.status==="approved"){
+            if(req.body.type==="research"){
 
                 let mailOptions={
                     from: 'lynxmass@gmail.com', //the mail which is registered inside the transporter object in mail.api.js file
@@ -60,7 +60,7 @@ router.patch("/upload/:id",auth, async (req, res) => {
 
                 await addLog("Reviewer","Research paper accepted and notified to "+req.body.email)
 
-            }else if(req.body.type=="workshop"){
+            }else if(req.body.type==="workshop"){
 
                 let mailOptions={
                     from: 'lynxmass@gmail.com', //the mail which is registered inside the transporter object in mail.api.js file
@@ -81,6 +81,47 @@ router.patch("/upload/:id",auth, async (req, res) => {
 
 
             }
+
+        } else if(req.body.status==="rejected"){
+
+
+            let mailOptions={
+                from: 'lynxmass@gmail.com', //the mail which is registered inside the transporter object in mail.api.js file
+                to: req.body.email,
+                subject: 'Submission Approval Rejection',
+                text: 'This mail is to ensure that your research paper has been rejected.'
+            }
+
+            await transporter.sendMail(mailOptions,async (err,info)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    console.log(info.response)
+                    await addLog("Reviewer","Research paper rejected and notified to "+req.body.email)
+                }
+            })
+
+            await addLog("Reviewer","Research paper rejected and notified to "+req.body.email)
+
+        }else if(req.body.type==="workshop"){
+
+            let mailOptions={
+                from: 'lynxmass@gmail.com', //the mail which is registered inside the transporter object in mail.api.js file
+                to: req.body.email,
+                subject: 'Submission Approval rejection',
+                text: 'This mail is to ensure that your workshop proposal has been rejected.'
+
+            }
+
+            await transporter.sendMail(mailOptions,async (err,info)=>{
+                if(err){
+                    console.log(err)
+                }else{
+                    console.log(info.response)
+                    await addLog("Reviewer","Workshop proposal rejected and notified to "+req.body.email)
+                }
+            })
+
 
         }
 

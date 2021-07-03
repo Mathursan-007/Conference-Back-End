@@ -29,7 +29,7 @@ const updateUploadStatus = async (id, status, reviewerID) => {
 
 // Updating payment Status of research paper submissions once user makes the payment
 const updatePaymentStatus = async (id, status) => {
-    return await upload.updateOne({"_id":ObjectID(id)}, {$set: {"details":{paymentStatus:status}}})
+    return await upload.updateOne({"_id":ObjectID(id)},{$set:{"details.paymentStatus":status}})
 }
 
 // Saving the research paper uploads into DB
